@@ -1,0 +1,54 @@
+name: Build Spider Studio Design APK
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Extract project ZIP
+        run: |
+          ZIP_PATH="$(find . -type f -name 'spider-studio-design.zip' -print -quit)"
+          if [ -z "$ZIP_PATH" ]; then
+            echo "Project ZIP not found"
+            exit 1
+          fi
+          mkdir extracted
+          unzip -q "$ZIP_PATH" -d extracted
+          WRAPPER="$(find extracted -type f -name gradlew -print -quit)"
+          if [ -z "$WRAPPER" ]; then
+            echo "Gradle wrapper not found in ZIP"
+            exit 1
+          fi
+          PROJECT_DIR="$(dirname "$WRAPPER")"
+          echo "PROJECT_DIR=$PROJECT_DIR" >> "$GITHUB_ENV"
+          chmod +x "$WRAPPER"
+
+      - name: Build APK
+        run: |
+          cd "$PROJECT_DIR"
+          ./gradlew assembleDebug
+
+      - name: Save APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Spider-Studio-Design-APK
+          path: ${{ env.PROJECT_DIR }}/app/build/outputs/apk/debug/*.apk
+          
