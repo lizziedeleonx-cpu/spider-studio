@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Spider Studio Design</string>
+    <string name="brand_full_name">Spider Studio Design</string>
+    <string name="brand_tagline">Motor vectorial nativo para ilustración, diseño y composición digital</string>
+    <string name="nav_home">Inicio</string>
+    <string name="nav_templates">Plantillas</string>
+    <string name="nav_assets">Recursos</string>
+    <string name="nav_projects">Proyectos</string>
+    <string name="nav_settings">Ajustes</string>
+    <string name="action_new_document">Nuevo documento</string>
+    <string name="action_import_file">Importar archivo</string>
+    <string name="action_open_editor">Abrir estudio</string>
+    <string name="action_save">Guardar</string>
+    <string name="action_undo">Deshacer</string>
+    <string name="action_redo">Rehacer</string>
+    <string name="action_export">Exportar</string>
+    <string name="error_load_project">No se pudo cargar el proyecto solicitado.</string>
+    <string name="error_export_failed">Error al generar el archivo de exportación.</string>
+    <string name="error_import_failed">El archivo seleccionado no es compatible o está dañado.</string>
+</resources>
